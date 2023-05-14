@@ -20,6 +20,7 @@ const WINDOW_SIZE_IN_HOURS = 24;
 const MAX_WINDOW_REQUEST_COUNT = 10;
 const WINDOW_LOG_INTERVAL_IN_HOURS = 1;
 
+// This is actually sliding window rate limiter
 customRedisRateLimiter = async (req, res, next) => {
   
   try {

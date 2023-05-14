@@ -4,7 +4,7 @@ const port = 3000
 let logger = require('morgan')
 var path = require('path');
 const { getFiles } = require("./util/functions")
-const { rateLimiterUsingThirdParty, customRedisRateLimiter } = require('./middlewares/index')
+const { rateLimiterUsingThirdParty, customRedisRateLimiter, MyrateLimiter } = require('./middlewares/index')
 
 // basic app setup
 const app = express()
@@ -13,8 +13,16 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
+const limiter = MyrateLimiter({
+	windowMs: 1 * 60 * 1000, // 1 minutes
+	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
 // rate limiter
-app.use(customRedisRateLimiter);
+app.use(limiter);
+//app.use(customRedisRateLimiter);
 
 // load Routes
 let routes = getFiles("./routes/",".js")

@@ -1,2 +1,3 @@
 const  {rateLimiterUsingThirdParty ,customRedisRateLimiter }= require('./rateLimiter')
-module.exports =  { rateLimiterUsingThirdParty, customRedisRateLimiter }
+const  { rateLimit }  = require('./myRateLimiter')
+module.exports =  { rateLimiterUsingThirdParty, customRedisRateLimiter , MyrateLimiter: rateLimit }

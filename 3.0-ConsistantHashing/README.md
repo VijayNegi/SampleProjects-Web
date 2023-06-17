@@ -23,5 +23,29 @@ Ref - https://docs.openstack.org/swift/latest/ring_background.html
 Example to demostrate problem while rehashing, i.e. the number of IDs moved to a new node.
 Output - 
 ```
-9900989 ids moved, 99.01%
+For key Mod Method: 9900989 ids moved, 99.01%
+For Range Mod Method : 4897496 ids moved, 48.97%
+```
+
+5. [ Example 4](index4.js)
+Ref - https://docs.openstack.org/swift/latest/ring_background.html
+Example to demonstrate virtual node solution for rehashing problem
+Output - 
+```
+99763 ids moved, 1.00%
+```
+
+6. [ Example 5](index5.js)
+Ref - https://docs.openstack.org/swift/latest/ring_background.html
+Example to demonstrate wisely choosing virtual node setting as vritual nodes limit the real nodes.
+
+A good rule to follow might be to calculate 100 virtual nodes to each real node at maximum capacity. This would allow you to alter the load on any given node by 1%, even at max capacity, which is pretty fine tuning. So now we’re at 6,000,000 virtual nodes for a max capacity cluster of 60,000 real nodes.
+
+Note -  +–10% seems a bit high, but I reran with 65,536 partitions and 256 nodes and got +–0.4% so it’s just that our sample size (100m) is too small for our number of partitions (8m). 
+
+Output - 
+```
+1525.87890625: Desired data ids per node
+1683: Most data ids on one node, 10.30% over
+1360: Least data ids on one node, 10.87% under
 ```

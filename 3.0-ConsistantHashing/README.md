@@ -49,3 +49,55 @@ Output -
 1683: Most data ids on one node, 10.30% over
 1360: Least data ids on one node, 10.87% under
 ```
+
+6. [ Example 6](index6.js)
+Ref - https://docs.openstack.org/swift/latest/ring_background.html
+Example :  how to increase the durability and availability of our data in the cluster.
+i.e. Replication in Consistant hashing in single ring
+
+Output - 
+```
+117187.5: Desired data ids per node
+118133: Most data ids on one node, 0.81% over
+116093: Least data ids on one node, 0.93% under
+```
+
+7. [ Example 7](index7.js)
+Ref - https://docs.openstack.org/swift/latest/ring_background.html
+Example :  introduce zoning while replication
+
+Output - 
+```
+117187.5: Desired data ids per node
+118133: Most data ids on one node, 0.81% over
+116093: Least data ids on one node, 0.93% under
+```
+
+7. [ Example 8](index8.js)
+Ref - https://docs.openstack.org/swift/latest/ring_background.html
+Example :  This alternate method doesn’t use partitions at all, but instead just assigns anchors to the nodes within the hash space. Finding the first node for a given hash just involves walking this anchor ring for the next node, and finding additional nodes works similarly as before. To attain the equivalent of our virtual nodes, each real node is assigned multiple anchors.
+
+this method also gives much less control over the distribution. To get better distribution, you have to add more virtual nodes, which eats up more memory and takes even more time to build the ring and perform distinct node lookups. The most common operation, data id lookup, can be improved (by predetermining each virtual node’s failover nodes, for instance) but it starts off so far behind our first approach that we’ll just stick with that.
+Output - 
+```
+117187.5: Desired data ids per node
+351282: Most data ids on one node, 199.76% over
+15965: Least data ids on one node, 86.38% under
+1875000: Desired data ids per zone
+2248496: Most data ids in one zone, 19.92% over
+1378013: Least data ids in one zone, 26.51% under
+```
+
+7. [ Example 9](index9.js)
+Ref - https://docs.openstack.org/swift/latest/ring_background.html
+Example :  Final example class with Nodes with weight 
+Output - Output does not match with article , need to look bug in weights code
+```
+4642.97ms to build ring
+43667.79ms to test ring
+34.90% max node over
+17.46% max node under
+33.38% max zone over
+16.72% max zone under
+```
+

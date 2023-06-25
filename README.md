@@ -7,3 +7,6 @@ Projects :
 
 2.0 Rate Limiter - Express-rate-limit
 
+3.0-ConsistentHashing - Consistent Hashing
+
+

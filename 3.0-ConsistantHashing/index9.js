@@ -39,6 +39,11 @@ class Ring {
     return nodeIds.map((nodeId) => this.nodes[nodeId]);
   }
 }
+// write a function that builds a ring
+// given a set of nodes, partition power, and replicas
+//  - partition power is the power of 2 that is the number of partitions
+//  - replicas is the number of nodes that each data id is replicated to
+//  - each node has a weight, which is the relative amount of data it should hold
 
 function buildRing(nodes, partitionPower, replicas) {
   const begin = performance.now();

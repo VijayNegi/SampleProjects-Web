@@ -6,3 +6,11 @@ Impliment Key-Value Store
 4. Distributed In-Memory Store
 5. Distributed Persistent Store
 
+
+# New Learnings
+- API testing with Mocha and Chai
+
+
+# References
+- https://www.codeproject.com/Articles/5306500/A-Simple-Key-Value-Store-Microservice - For In Memory Store
+- 

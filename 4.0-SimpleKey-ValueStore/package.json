@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon --inspect ./app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 200"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,10 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "chai": "^4.3.7",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22",
+    "redis": "^4.6.7"
   }
 }

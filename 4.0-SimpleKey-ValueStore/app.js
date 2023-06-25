@@ -28,3 +28,6 @@ routes.forEach((f,i) => {
 });
 
 app.listen(port,()=>{ console.log("Express server running....")})
+
+// for testing
+module.exports = app;

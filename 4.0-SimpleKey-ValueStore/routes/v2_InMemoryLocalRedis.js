@@ -4,8 +4,10 @@ let router = express.Router();
 const redis = require('redis');
 const client = redis.createClient();
 
-const buckets = {};
-const locker = {}
+client.on('error', (err) => console.log('Redis Client Error', err));
+(async () => {
+    await client.connect();
+})()
 
 let requestHandler = function(req, res, next){
     res.send("V2 API is running... IN MEMORY LOCAL STORAGE  with REDIS")
@@ -13,31 +15,40 @@ let requestHandler = function(req, res, next){
 
 // Set a key-value pair in Redis
 //app.get('/set/:key/:value', (req, res) => {
-let getHandler = function (req, res) {
+let setHandler = async function (req, res) {
     const { key, value } = req.params;
-    client.set(key, value, (err, reply) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Internal server error' });
-      }
-      return res.json({ message: 'Key-value pair set successfully' });
-    });
+    await client.set('key', 'value');
+    return res.json({ message: 'Key-value pair set successfully' });
+    // client.set(key, value, (err, reply) => {
+    //   if (err) {
+    //     console.error(err);
+    //     return res.status(500).json({ error: 'Internal server error' });
+    //   }
+    //   return res.json({ message: 'Key-value pair set successfully' });
+    // });
   };
   
   // Get the value for a given key from Redis
   //app.get('/get/:key', (req, res) => {
-let setHandler = function (req, res) {
+let getHandler = async function (req, res) {
     const { key } = req.params;
-    client.get(key, (err, value) => {
-      if (err) {
-        console.error(err);
+    if (!client) 
         return res.status(500).json({ error: 'Internal server error' });
-      }
-      if (value === null) {
+    const value = await client.get(key);
+    if(value === null)
         return res.status(404).json({ error: 'Key not found' });
-      }
-      return res.json({ key, value });
-    });
+    return res.json({ key, value });
+
+    // client.get(key, (err, value) => {
+    //   if (err) {
+    //     console.error(err);
+    //     return res.status(500).json({ error: 'Internal server error' });
+    //   }
+    //   if (value === null) {
+    //     return res.status(404).json({ error: 'Key not found' });
+    //   }
+    //   return res.json({ key, value });
+    // });
   };
   
 

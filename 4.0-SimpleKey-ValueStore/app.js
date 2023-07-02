@@ -1,5 +1,7 @@
 const express = require('express')
-const port = 3000
+
+// read port from user input
+const port = process.argv[2] || 3000
 
 let logger = require('morgan')
 var path = require('path');

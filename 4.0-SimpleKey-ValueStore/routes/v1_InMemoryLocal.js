@@ -17,7 +17,7 @@ let dataGetHandler = function(req, res, next){
     }
 }
 let dataGetParamHandler = function(req, res, next){
-    const bucketName = req.params.id;
+    const bucketName = req.params.key;
     if (buckets[bucketName]) {
         res.json(buckets[bucketName].data);
     } else {
@@ -32,7 +32,7 @@ let listHandler = function (req, res) {
 
 // '/MemoryBucket/Bucket'
 let buckethandler = function (req, res) {
-    const bucketName = req.query.id;
+    const bucketName = req.query.key;
     if (buckets[bucketName]) {
         res.json(buckets[bucketName]);
     } else {
@@ -42,7 +42,7 @@ let buckethandler = function (req, res) {
 
 // '/MemoryBucket/:bucketName'
 let bucketDeletehandler = function (req, res) {
-    const bucketName = req.params.id;
+    const bucketName = req.params.key;
     if (buckets[bucketName]) {
       delete buckets[bucketName];
       res.sendStatus(204);
@@ -65,6 +65,13 @@ let bucketSetParamhandler = function (req, res) {
     createOrGetBucket(bucketName).data = data;
     res.json(data);
     };
+// '/MemoryBucket/set/id'
+    let bucketSetParamhandler1 = function (req, res) {
+      const bucketName = req.params.key;
+      const data = req.params.value;
+      createOrGetBucket(bucketName).data = data;
+      res.json(data);
+      };
   
   // '/MemoryBucket/Update'
   let bucketUpdatehandler = function (req, res) {
@@ -93,12 +100,17 @@ let bucketSetParamhandler = function (req, res) {
 
 // Home page for this router
 router.get('/', requestHandler)
-router.get('/data/list', listHandler)
-router.get('/data', dataGetHandler)
-router.get('/data/get/:id', dataGetParamHandler)
-router.post('/data/set', bucketSethandler)
-router.post('/data/set/:id', bucketSetParamhandler)
-router.delete('/data/:id', bucketDeletehandler)
+router.get('/list', listHandler)
+// router.get('/data', dataGetHandler)
+// router.get('/data/get/:key', dataGetParamHandler)
+// router.post('/data/set', bucketSethandler)
+// router.post('/data/set/:key', bucketSetParamhandler)
+// router.delete('/data/:key', bucketDeletehandler)
+
+// simple apis
+router.get('/get/:key', dataGetParamHandler)
+router.get('/set/:key/:value', bucketSetParamhandler1)
+
 
 module.exports = {
 	name: "v1 API",

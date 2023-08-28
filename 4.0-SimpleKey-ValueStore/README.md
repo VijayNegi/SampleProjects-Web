@@ -10,7 +10,8 @@
 # api versions
 v1 - In Memory Store
 v2 - In Memory Store with Redis or the other in-memory store
-v3 - distributed in-memory store (check routing file for exact api)
+v3 - distributed in-memory store with REST (check routing file for exact api)
+v4 - distributed in-memory store with gRPC (check routing file for exact api) - Need different server for this
 
 # New Learnings
 - API testing with Mocha and Chai

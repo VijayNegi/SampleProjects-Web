@@ -13,9 +13,9 @@
                 "<node_internals>/**"
             ],
             "program": "${file}",
-            "cwd": "${workspaceFolder}/4.0-SimpleKey-ValueStore",
+            "cwd": "${workspaceFolder}/6.1-Kafka",
             "localRoot": "${workspaceFolder}"
-        }
+        },
         {
             "type": "node",
             "request": "attach",

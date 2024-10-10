@@ -2,11 +2,17 @@
   "name": "6.1-kafka",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "admin.js",
   "scripts": {
+    "dev": "nodemon --inspect ./admin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ip": "^1.1.8",
+    "kafkajs": "^2.2.4",
+    "nodemon": "^3.0.1"
+  }
 }
